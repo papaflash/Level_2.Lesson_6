@@ -14,7 +14,7 @@
         <TextBox x:Name="middleNameTxBox" HorizontalAlignment="Left" Height="16" Margin="10,106,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="101" MaxLength="30"/>
         <TextBox x:Name="lastNameTxBox"  HorizontalAlignment="Left" Height="16" Margin="10,153,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="101" MaxLength="30"/>
         <Button x:Name="addOrChangeBtn" Content="Добавить" HorizontalAlignment="Left" Margin="10,185,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_1"/>
-        <ComboBox x:Name="departmentBox" Width="200" Height="30" Margin="182,63,10,226" DisplayMemberPath="{Binding NameDepartment}"/>
+        <ComboBox x:Name="departmentBox" Width="200" Height="30" Margin="182,63,10,226" DisplayMemberPath="{Binding NameDepartment, Mode=TwoWay}"/>
         <TextBox x:Name="newDepartment"  Width="200" Height="30" Margin="190,140,20,170" KeyUp="NewDepartment_KeyUp" MaxLength="50"/>
         <Button x:Name="addDepartment" Width="200" Height="30" Content="Добавить департамент" Click="Button_Click" Margin="190,175,20,130"/>
         <Label x:Name="depLbl" Content="Новый департамент" HorizontalAlignment="Left" Margin="198,114,0,0" VerticalAlignment="Top" MouseDown="DepLbl_MouseDown"/>

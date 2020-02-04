@@ -88,7 +88,8 @@ namespace EmployeeAndDepartment
             nameTxBox.Text = (_listView.SelectedItem as Employee).Name;
             middleNameTxBox.Text = (_listView.SelectedItem as Employee).MiddleName;
             lastNameTxBox.Text = (_listView.SelectedItem as Employee).LastName;
-            departmentBox.SelectedItem = (_listView.SelectedItem as Employee).Department;
+            departmentBox.Text = (_listView.SelectedItem as Employee).Department;
+            //newDepartment.Text = (_listView.SelectedItem as Employee).Department;
             addOrChangeBtn.Content = "Изменить";
         }
         private void ChangeEmployee()
