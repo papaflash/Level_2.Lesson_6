@@ -7,17 +7,18 @@
         mc:Ignorable="d"
         Title="Редактирование данных по сотрудникам" Height="380" Width="430" ResizeMode="NoResize">
     <Grid Background="AliceBlue">
-        <Label Content="Имя" HorizontalAlignment="Left" Margin="10,34,0,0" VerticalAlignment="Top" MouseDown="Label_MouseDown"/>
-        <Label Content="Отчество" HorizontalAlignment="Left" Margin="10,81,0,0" VerticalAlignment="Top" MouseDown="Label_MouseDown_1"/>
-        <Label Content="Фамилия" HorizontalAlignment="Left" Margin="11,127,0,0" VerticalAlignment="Top" MouseDown="Label_MouseDown_2"/>
-        <TextBox x:Name="nameTxBox" HorizontalAlignment="Left" Height="16" Margin="10,60,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="101" MaxLength="30"/>
-        <TextBox x:Name="middleNameTxBox" HorizontalAlignment="Left" Height="16" Margin="10,106,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="101" MaxLength="30"/>
-        <TextBox x:Name="lastNameTxBox"  HorizontalAlignment="Left" Height="16" Margin="10,153,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="101" MaxLength="30"/>
-        <Button x:Name="addOrChangeBtn" Content="Добавить" HorizontalAlignment="Left" Margin="10,185,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_1"/>
+        <Label Content="Имя" HorizontalAlignment="Left" Margin="10,62,0,0" VerticalAlignment="Top" MouseDown="Label_MouseDown"/>
+        <Label Content="Отчество" HorizontalAlignment="Left" Margin="10,109,0,0" VerticalAlignment="Top" MouseDown="Label_MouseDown_1"/>
+        <Label Content="Фамилия" HorizontalAlignment="Left" Margin="11,155,0,0" VerticalAlignment="Top" MouseDown="Label_MouseDown_2"/>
+        <TextBox x:Name="nameTxBox" HorizontalAlignment="Left" Height="16" Margin="10,88,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="136" MaxLength="30"/>
+        <TextBox x:Name="middleNameTxBox" HorizontalAlignment="Left" Height="16" Margin="10,134,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="136" MaxLength="30"/>
+        <TextBox x:Name="lastNameTxBox"  HorizontalAlignment="Left" Height="16" Margin="10,181,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="136" MaxLength="30"/>
+        <Button x:Name="addOrChangeEmpBtn" Content="Добавить" HorizontalAlignment="Left" Margin="10,213,0,0" VerticalAlignment="Top" Width="136" Click="Button_Click_1"/>
         <ComboBox x:Name="departmentBox" Width="200" Height="30" Margin="182,63,10,226" DisplayMemberPath="NameDepartment"/>
         <TextBox x:Name="newDepartment"  Width="200" Height="30" Margin="190,140,20,170" KeyUp="NewDepartment_KeyUp" MaxLength="50"/>
-        <Button x:Name="addDepartment" Width="200" Height="30" Content="Добавить департамент" Click="Button_Click" Margin="190,175,20,130"/>
+        <Button x:Name="addDepartmentBtn" Width="200" Height="30" Content="Добавить департамент" Click="Button_Click" Margin="190,175,20,130"/>
         <Label x:Name="depLbl" Content="Новый департамент" HorizontalAlignment="Left" Margin="198,114,0,0" VerticalAlignment="Top" MouseDown="DepLbl_MouseDown"/>
+        <Button x:Name="changeDepBtn" Visibility="Hidden" Content="Изенить департамент" HorizontalAlignment="Left" Margin="190,228,20,13" VerticalAlignment="Top" Width="199" Height="27" Click="changeDepBtn_Click"/>
 
     </Grid>
 </Window>

@@ -36,7 +36,11 @@ namespace EmployeeAndDepartment
             _listView = listView;
             _change = change;
             departmentBox.ItemsSource = _departments;
-            if (_change) InitChangeEmployee();
+            if (_change)
+            {
+                InitChangeEmployee();
+                changeDepBtn.Visibility = Visibility.Visible;
+            }
         }
         /// <summary>
         /// Метод добавления нового департамента
@@ -90,12 +94,12 @@ namespace EmployeeAndDepartment
         #region Методы заполнения полей ФИО выбранным сотрудником для изменения
         private void InitChangeEmployee()
         {
-            nameTxBox.Text = (_listView.SelectedItem as Employee).Name;
-            middleNameTxBox.Text = (_listView.SelectedItem as Employee).MiddleName;
-            lastNameTxBox.Text = (_listView.SelectedItem as Employee).LastName;
-            departmentBox.Text = (_listView.SelectedItem as Employee).Department.NameDepartment;
-            newDepartment.Text = (_listView.SelectedItem as Employee).Department.NameDepartment;
-            addOrChangeBtn.Content = "Изменить";
+                nameTxBox.Text = (_listView.SelectedItem as Employee).Name;
+                middleNameTxBox.Text = (_listView.SelectedItem as Employee).MiddleName;
+                lastNameTxBox.Text = (_listView.SelectedItem as Employee).LastName;
+                departmentBox.Text = (_listView.SelectedItem as Employee).Department.NameDepartment;
+                newDepartment.Text = (_listView.SelectedItem as Employee).Department.NameDepartment;
+                addOrChangeEmpBtn.Content = "Изменить работника";
         }
         private void ChangeEmployee()
         {
@@ -105,8 +109,6 @@ namespace EmployeeAndDepartment
                 _employees[i].Name = nameTxBox.Text;
                 _employees[i].MiddleName = middleNameTxBox.Text;
                 _employees[i].LastName = lastNameTxBox.Text;
-                if(newDepartment.Text != "")
-                    _departments[departmentBox.SelectedIndex].NameDepartment = newDepartment.Text;
                 _employees[i].Department = _departments[departmentBox.SelectedIndex];
                 _listView.Items.Refresh();
             }
@@ -145,5 +147,14 @@ namespace EmployeeAndDepartment
             return false;
         }
         #endregion
+
+        private void changeDepBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (newDepartment.Text != "")
+            {
+                _departments[departmentBox.SelectedIndex].NameDepartment = newDepartment.Text;
+                newDepartment.Text = "";
+            }
+        }
     }
 }

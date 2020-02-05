@@ -81,11 +81,15 @@ namespace EmployeeAndDepartment
         }
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
-            EmployeeWindow addEmpWindow = new EmployeeWindow(_department, _employees, employeeList, true)
+            if (employeeList.SelectedItem != null)
             {
-                Owner = this
-            };
-            addEmpWindow.Show();
+                EmployeeWindow addEmpWindow = new EmployeeWindow(_department, _employees, employeeList, true)
+                {
+                    Owner = this
+                };
+                addEmpWindow.Show();
+            }
+            else MessageBox.Show("Выберите работника!", "Ошибка выбора работника", MessageBoxButton.OK, MessageBoxImage.Information);
         }
         #endregion
         /// <summary>
