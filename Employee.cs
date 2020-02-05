@@ -10,7 +10,7 @@ namespace EmployeeAndDepartment
     {
         private string _name;
         private string _middleName;
-        public string Department { set; get; }
+        public Department Department { set; get; }
         public string Name
         {
             set { _name = value; }
@@ -22,7 +22,7 @@ namespace EmployeeAndDepartment
             get { return _middleName; }
         }
         public string LastName { set; get; }
-        public Employee(string name, string middleName, string lastName, string department)
+        public Employee(string name, string middleName, string lastName, Department department)
         {
             Name = name;
             MiddleName = middleName;

@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Collections.ObjectModel;
 using System.Text.RegularExpressions;
+
 namespace EmployeeAndDepartment
 {
     /// <summary>
@@ -20,7 +21,7 @@ namespace EmployeeAndDepartment
     /// </summary>
     public partial class EmployeeWindow : Window
     {
-        private ObservableCollection<Department> _department;
+        private ObservableCollection<Department> _departments;
         private ObservableCollection<Employee> _employees;
         private ListView _listView;
         private bool _change;
@@ -28,13 +29,13 @@ namespace EmployeeAndDepartment
         {
             InitializeComponent();
         }
-        public EmployeeWindow(ObservableCollection<Department> department, ObservableCollection<Employee> employees, ListView listView, bool change) : this()
+        public EmployeeWindow(ObservableCollection<Department> departments, ObservableCollection<Employee> employees, ListView listView, bool change) : this()
         {
-            _department = department;
+            _departments = departments;
             _employees = employees;
             _listView = listView;
             _change = change;
-            departmentBox.ItemsSource = _department;
+            departmentBox.ItemsSource = _departments;
             if (_change) InitChangeEmployee();
         }
         /// <summary>
@@ -42,17 +43,22 @@ namespace EmployeeAndDepartment
         /// </summary>
         private void AddNewDeppartment()
         {
-            _department.Add(new Department(newDepartment.Text));
+            var d = _departments.Select(n => n.NameDepartment);
+            if (newDepartment.Text != "" && !d.Contains(newDepartment.Text))
+                _departments.Add(new Department(newDepartment.Text));
+            else
+                MessageBox.Show("Ошибка! Такой департамент уже есть или вы пытаетесь добавить департамент без названия",
+                    "Ошибка добавления департамента",MessageBoxButton.OK, MessageBoxImage.Error);
             newDepartment.Text = "";
         }
         #region Обработчики по клику или по нажатой Enter вызывают метод для добавления нового департамента
         private void NewDepartment_KeyUp(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Enter && newDepartment.Text != "") AddNewDeppartment();
+            if (e.Key == Key.Enter) AddNewDeppartment();
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            if (newDepartment.Text != "") AddNewDeppartment();
+            AddNewDeppartment();
         }
         #endregion
         /// <summary>
@@ -62,13 +68,12 @@ namespace EmployeeAndDepartment
         {
             if (IsValidateEmployer())
             {
-                _employees.Add(new Employee(nameTxBox.Text, middleNameTxBox.Text, lastNameTxBox.Text, departmentBox.Text));
+                _employees.Add(new Employee(nameTxBox.Text, middleNameTxBox.Text, lastNameTxBox.Text, _departments[departmentBox.SelectedIndex]));
                 nameTxBox.Text = "";
                 middleNameTxBox.Text = "";
                 lastNameTxBox.Text = "";
                 departmentBox.Text = "";
             }
-            else MessageBox.Show("Поля с ФИО должны быть заполнены, в них не должно быть пробелов и спец. символов кроме -");
         }
         /// <summary>
         /// Добавляем по клику нового сотрудника либо, изменяем выбранного
@@ -88,8 +93,8 @@ namespace EmployeeAndDepartment
             nameTxBox.Text = (_listView.SelectedItem as Employee).Name;
             middleNameTxBox.Text = (_listView.SelectedItem as Employee).MiddleName;
             lastNameTxBox.Text = (_listView.SelectedItem as Employee).LastName;
-            departmentBox.Text = (_listView.SelectedItem as Employee).Department;
-            //newDepartment.Text = (_listView.SelectedItem as Employee).Department;
+            departmentBox.Text = (_listView.SelectedItem as Employee).Department.NameDepartment;
+            newDepartment.Text = (_listView.SelectedItem as Employee).Department.NameDepartment;
             addOrChangeBtn.Content = "Изменить";
         }
         private void ChangeEmployee()
@@ -100,10 +105,11 @@ namespace EmployeeAndDepartment
                 _employees[i].Name = nameTxBox.Text;
                 _employees[i].MiddleName = middleNameTxBox.Text;
                 _employees[i].LastName = lastNameTxBox.Text;
-                _employees[i].Department = departmentBox.Text;
+                if(newDepartment.Text != "")
+                    _departments[departmentBox.SelectedIndex].NameDepartment = newDepartment.Text;
+                _employees[i].Department = _departments[departmentBox.SelectedIndex];
                 _listView.Items.Refresh();
             }
-            else MessageBox.Show("Поля с ФИО должны быть заполнены, в них не должно быть пробелов и спец. символов кроме -");
         }
         #endregion
         #region Обработчики Связывания лейблов с текстовыми полями
@@ -132,8 +138,10 @@ namespace EmployeeAndDepartment
         {
             string pattern = @"^\w+\-?\w+$";
             Regex regex = new Regex(pattern);
-            if (regex.IsMatch(nameTxBox.Text) && regex.IsMatch(middleNameTxBox.Text) && regex.IsMatch(lastNameTxBox.Text) && departmentBox.SelectedItem != null)
+            if (regex.IsMatch(nameTxBox.Text) && regex.IsMatch(middleNameTxBox.Text) && regex.IsMatch(lastNameTxBox.Text)
+                 && departmentBox.SelectedIndex != -1)
                 return true;
+            else MessageBox.Show("Поля с ФИО должны быть заполнены, в них не должно быть пробелов и спец. символов кроме -, должен быть выбран отдел!");
             return false;
         }
         #endregion

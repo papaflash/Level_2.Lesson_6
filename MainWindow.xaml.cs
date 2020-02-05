@@ -60,11 +60,11 @@ namespace EmployeeAndDepartment
                 };
                 _employees = new ObservableCollection<Employee>()
                 {
-                    new Employee("Василий", "Степанович", "Горшков", _department[1].NameDepartment),
-                    new Employee("Аркадий", "Иванович", "Смирнов", _department[0].NameDepartment),
-                    new Employee("Алексей", "Валерьевич", "Иванов", _department[2].NameDepartment),
-                    new Employee("Светлана", "Александровна", "Приходько", _department[3].NameDepartment),
-                    new Employee("Жанна", "Васильевна", "Морозова", _department[0].NameDepartment)
+                    new Employee("Василий", "Степанович", "Горшков", _department[1]),
+                    new Employee("Аркадий", "Иванович", "Смирнов", _department[0]),
+                    new Employee("Алексей", "Валерьевич", "Иванов", _department[2]),
+                    new Employee("Светлана", "Александровна", "Приходько", _department[3]),
+                    new Employee("Жанна", "Васильевна", "Морозова", _department[0])
                 };
             }
             employeeList.ItemsSource = _employees;
