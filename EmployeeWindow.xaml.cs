@@ -110,7 +110,7 @@ namespace EmployeeAndDepartment
                 _employees[i].MiddleName = middleNameTxBox.Text;
                 _employees[i].LastName = lastNameTxBox.Text;
                 _employees[i].Department = _departments[departmentBox.SelectedIndex];
-                _listView.Items.Refresh();
+                //_listView.Items.Refresh(); Больше не нужен, так как реализован интерфейс INotifyPropertyChanged
             }
         }
         #endregion
